@@ -11,5 +11,6 @@ actives.filter(function(element) {
         }
     });
 });
+
 console.log(templates);
 console.log(templates.length);
