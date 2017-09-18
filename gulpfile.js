@@ -1,17 +1,17 @@
-const path = process.env.CMS_PROD_LOCAL_PATH;
-const dist = './dist';
+const LOCAL_PATH = process.env.CMS_PROD_LOCAL_PATH;
+const BUILD_DIRECTORY = './dist';
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
 const del = require('del');
 const replace = require('gulp-replace');
-const templates = require('./modules/templates')(path);
+const templates = require('./modules/templates')(LOCAL_PATH);
 const timestamp = new Date().getTime();
 
 // console.log('templates ', templates);
 console.log(`UPDATE ${templates.length} FILES WITH TIMESTAMP: ${timestamp}`);
 
 gulp.task('clean', () => {
-  del([dist]);
+  return del([BUILD_DIRECTORY]);
 });
 
 gulp.task('bust', () => {
@@ -21,9 +21,9 @@ gulp.task('bust', () => {
     return `${match}${timestamp}`;
   })).on('error', () => {
     console.log(arguments);
-  }).pipe(gulp.dest(dist));
+  }).pipe(gulp.dest(BUILD_DIRECTORY));
 });
 
 gulp.task('default', () => {
-  runSequence(['clean', 'bust']);
+  runSequence(['clean'], ['bust']);
 });
