@@ -1,4 +1,9 @@
 # IGNORE FILES
 
+# FILES
 .DS_Store
 rules.json
+
+
+# FOLDERS
+node_modules/
