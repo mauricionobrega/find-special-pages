@@ -1,0 +1,24 @@
+{
+  "name": "find-special",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cache-refresh": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mauricionobrega/find-special-pages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mauricionobrega/find-special-pages/issues"
+  },
+  "homepage": "https://github.com/mauricionobrega/find-special-pages#readme"
+}
