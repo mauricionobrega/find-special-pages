@@ -1,6 +1,7 @@
 const path = process.env.CMS_PROD_LOCAL_PATH;
 const dist = './dist';
 const gulp = require('gulp');
+const runSequence = require('run-sequence');
 const del = require('del');
 const replace = require('gulp-replace');
 const templates = require('./modules/templates')(path);
@@ -23,4 +24,6 @@ gulp.task('bust', () => {
   }).pipe(gulp.dest(dist));
 });
 
-gulp.task('default', ['clean', 'bust']);
+gulp.task('default', () => {
+  runSequence(['clean', 'bust']);
+});
