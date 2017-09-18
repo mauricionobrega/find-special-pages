@@ -6,8 +6,8 @@ const replace = require('gulp-replace');
 const templates = require('./modules/templates')(path);
 const timestamp = new Date().getTime();
 
-console.log('templates ', templates);
-console.log(`UPDATE FILES WITH TIMESTAMP: ${timestamp}`);
+// console.log('templates ', templates);
+console.log(`UPDATE ${templates.length} FILES WITH TIMESTAMP: ${timestamp}`);
 
 gulp.task('clean', () => {
   del([dist]);
