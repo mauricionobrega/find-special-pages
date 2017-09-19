@@ -1,13 +1,14 @@
-const LOCAL_PATH = process.env.CMS_PROD_LOCAL_PATH;
 const BUILD_DIRECTORY = './dist';
+const timestamp = new Date().getTime();
 const gulp = require('gulp');
-const device = require('yargs').argv.mobile ? 'mobile-generic' : 'pc';
 const runSequence = require('run-sequence');
 const del = require('del');
 const replace = require('gulp-replace');
-const rules = require('./rules.json');
-const templates = require('./modules/templates')(LOCAL_PATH, device, rules);
-const timestamp = new Date().getTime();
+const templates = require('./modules/templates')({
+  path: process.env.CMS_PROD_LOCAL_PATH,
+  device: require('yargs').argv.mobile ? 'mobile-generic' : 'pc',
+  rules: require('./rules.json')
+});
 
 gulp.task('clean', () => {
   return del([BUILD_DIRECTORY]);
