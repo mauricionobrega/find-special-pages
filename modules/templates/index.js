@@ -1,15 +1,14 @@
-module.exports = (path) => {
+module.exports = (path, device, rules) => {
   'use strict';
 
   let templates = [];
-  const json = require('./rules.json');
-  const actives = json.filter((element) => {
+  let actives = rules.filter((element) => {
     return element.active;
   });
 
   actives.filter((element) => {
-    const mob = element.templateRules.find((rule) => {
-      if (rule.name === 'mobile' && templates.indexOf(rule.template) === -1) {
+    element.templateRules.find((rule) => {
+      if (rule.userAgents.indexOf(device) + 1 && templates.indexOf(rule.template) < 0) {
         templates.push(`${path}/${rule.template}`);
       }
     });
