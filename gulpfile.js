@@ -30,11 +30,9 @@ gulp.task('bust', () => {
 });
 
 gulp.task('copy', function () {
-  // console.log(i);
-  while(i--) {
+  while (i--) {
     const file = path.parse(templates[i]);
-    console.log(file);
-    gulp.src(BUILD_DIRECTORY + '/' + file).pipe(gulp.dest(dir));
+    gulp.src(BUILD_DIRECTORY + '/' + file.base).pipe(gulp.dest(file.dir));
   }
 });
 
