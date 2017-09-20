@@ -1,5 +1,7 @@
+'use strict';
 const BUILD_DIRECTORY = './dist';
 const timestamp = new Date().getTime();
+const path = require('path');
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
 const del = require('del');
@@ -9,6 +11,7 @@ const templates = require('./modules/templates')({
   device: require('yargs').argv.mobile ? 'mobile-generic' : 'pc',
   rules: require('./rules.json')
 });
+let i = templates.length;
 
 gulp.task('clean', () => {
   return del([BUILD_DIRECTORY]);
@@ -22,10 +25,19 @@ gulp.task('bust', () => {
   })).on('error', () => {
     console.log(arguments);
   }).pipe(gulp.dest(BUILD_DIRECTORY)).on('end', () => {
-    console.log(`UPDATE ${templates.length} FILES WITH TIMESTAMP: ${timestamp}`);
+    console.log(`UPDATE ${i} FILES WITH TIMESTAMP: ${timestamp}`);
   });
 });
 
+gulp.task('copy', function () {
+  // console.log(i);
+  while(i--) {
+    const file = path.parse(templates[i]);
+    console.log(file);
+    gulp.src(BUILD_DIRECTORY + '/' + file).pipe(gulp.dest(dir));
+  }
+});
+
 gulp.task('default', () => {
-  runSequence(['clean'], ['bust']);
+  runSequence(['clean'], ['bust'], ['copy']);
 });
